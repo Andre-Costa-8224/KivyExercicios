@@ -1,0 +1,123 @@
+<Gerenciador>:
+	Menu:
+		name:'menu'
+	Tarefas:
+		name:'tarefas'
+	Assistencia:
+		name:'assistencia'
+
+<Menu>:
+	BoxLayout:
+		
+		orientation:'vertical'
+		padding:250
+		spacing:60
+		
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+				source:'foto.png'
+			
+		Label:
+			
+		
+		Botao:
+			text:'Ver tarefas'
+			on_release:app.root.current='tarefas'
+			
+		Botao:
+			text:'Assistencia'
+			on_release:app.root.current='assistencia'
+			
+		Botao:
+			text:'Sair'
+			on_release:root.confirma()
+
+#<Botao@ButtonBehavior+Label>:
+	
+#	canvas.before:
+#		Color:
+#			rgba:0.1,0.5,0.7,0.9
+			
+#		Ellipse:
+#			pos:self.x,self.y
+#			size:self.width,self.height
+		
+
+<Assistencia>:
+	BoxLayout:
+		orientation:'vertical'
+		padding:200
+		spacing:50
+		
+		canvas:
+			Color:
+				rgba:0.1,0.7,1,0.5
+			Rectangle:
+				size:self.size
+				pos:self.pos
+		
+		TextInput:
+			id:tinput
+		Botao:
+			text:'Enviar'
+			on_release:root.enviaTexto()
+		Botao:
+			text:'Voltar'
+			on_release:app.root.current='menu'
+
+<Tarefas>:
+	BoxLayout:
+		
+		canvas:
+			Color:
+				rgba:0.1,0.7,1,0.5
+			Rectangle:
+				size:self.size
+				
+				pos:self.pos
+		orientation:'vertical'
+		ActionBar:
+			ActionView:
+				ActionPrevious:
+					title:'Tarefas'
+					on_release:app.root.current='menu'
+				ActionButton:
+					text:'Sair'
+					on_release:app.stop()
+		ScrollView:
+			BoxLayout:
+				id:box
+				orientation:'vertical'
+				size_hint_y:None
+				height:self.minimum_height
+		BoxLayout:
+			size_hint_y:None
+			height:80
+			TextInput:
+				id:texto
+			Button:
+				text:'+'
+				size_hint_x:None
+				width:100
+				on_release:root.addWidget()
+		
+				
+		
+		
+<Tarefa>:
+	size_hint_y:None
+	height:200
+	Label:
+		id:label
+		font_size:30
+	Button:
+		text:'X'
+		size_hint_x:None
+		width:150
+		on_release:app.root.get_screen('tarefas').ids.box.remove_widget(root)
+
+		
